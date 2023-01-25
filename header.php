@@ -35,7 +35,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                    <a class="btn btn-primary" href="login.php">Oke</a>
+                    <a class="btn btn-primary" href="controller/logout.php">Oke</a>
                 </div>
             </div>
         </div>
