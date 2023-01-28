@@ -1,4 +1,15 @@
 
+<?php
+include "controller/koneksi.php";
+$sql = "SELECT * FROM admin order by id_admin ASC ";
+$query = mysqli_query($conn, $sql);
+$data = mysqli_fetch_assoc($query);
+// return var_dump($data);
+
+if (!$query) {
+die ('SQL Error: ' . mysqli_error($conn));
+}
+?>
 <ul class="navbar-nav ml-auto">
 
 
@@ -51,14 +62,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="" method="post" enctype="multipart/form-data" id="frm-mhs">
+                <form action="controller/ubahpass.php?id_admin=<?php echo $data['id_admin']; ?>" method="post" enctype="multipart/form-data" id="frm-mhs">
                         <div class="form-group">
                             <label>Username</label>
-                            <input type="text" class="form-control" name="username" class="required" value="" />
+                            <input type="text" class="form-control" name="username" class="required" value="<?php echo $data['username'];?>" />
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" name="password" class="form-control" name="nama_kos" class="required" />
+                            <input type="password" name="password" class="form-control" class="required" />
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>

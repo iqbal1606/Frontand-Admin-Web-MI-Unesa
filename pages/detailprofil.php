@@ -1,3 +1,15 @@
+<?php
+include "controller/koneksi.php";
+$sql_profil = "SELECT * FROM profil order by id_profil ASC ";
+
+$query_profil = mysqli_query($conn, $sql_profil);
+$data_profil = mysqli_fetch_assoc($query_profil);
+// return var_dump($data);
+
+if (!$query) {
+die ('SQL Error: ' . mysqli_error($conn));
+}
+?>
 <title>Profil</title>
 <!-- Page Heading -->
 <ol class="breadcrumb">
@@ -27,23 +39,23 @@
                 <div class="card-area">
                     <div>
                         <h6 class="font-weight-bold">Nama :</h6>
-                        <p>Manajemen Informatika</p>
+                        <p><?php echo $data_profil['nama_profil'];?></p>
                     </div>
                     <div>
                         <h6 class="font-weight-bold">Nomer Telepon :<h6>
-                        <p>09401920910391</p>
+                        <p><?php echo $data_profil['nomer_profil'];?></p>
                     </div>
                     <div>
                         <h6 class="font-weight-bold">Alamat :</h6>
-                        <p>MPQG+5MG, Jl. Prof. Moch Yamin, Ketintang, Kec. Gayungan, Kota SBY, Jawa Timur 60231</p>
+                        <p><?php echo $data_profil['alamat_profil'];?></p>
                     </div>
                     <div>
                         <h6 class="font-weight-bold">Link maps :</h6>
-                        <p>https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2027928.7027891946!2d113.5832404!3d-6.914709!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fb36853c3caf%3A0xc8b1886df4fb71c!2sProgram%20Vokasi%20UNESA!5e0!3m2!1sen!2sid!4v1672544809450!5m2!1sen!2sid</p>
+                        <p><?php echo $data_profil['link_map'];?></p>
                     </div>
                     <div>
                         <h6 class="font-weight-bold">Deskripsi :</h6>
-                        <p>Manajemen Informatika Jurusan Teknik INFORMATIKA adalah satu dari lima jurusan yang ada di selingkung Fakultas Teknik (FT) Universitas Negeri Surabaya (Unesa). Jurusan Teknik Informatika cikal bakalnya berasal dari jurursan Teknik Elektro pada Prodi D3 Manajemen Informatika dan S1 Pendidikan Teknologi nformasi, setelah proses pengajuan kepada DIKTI untuk pendirian jurusan Teknik Informatika pada tahun 2012</p>
+                        <p><?php echo $data_profil['deskripsi_profil'];?></p>
                     </div>
                 </div>
             </div>
@@ -72,27 +84,32 @@
 
 
                 <div class="card-body">
-                    <form action="" method="post"
+                    <form action="controller/profil.php?id_profil=<?php echo $data_profil['id_profil']; ?>" method="post"
                         enctype="multipart/form-data" id="frm-mhs">
                         <div class="form-group">
                             <label>Nama</label>
-                            <input type="text" name="nama_profil" value="Manajemen Informatika"
+                            <input type="text" name="nama_profil" value="<?php echo $data_profil['nama_profil'];?>"
                                 class="form-control"  class="required" />
                         </div>
                         <div class="form-group">
                             <label>Nomer</label>
-                            <input type="teks" name="nomer_profil" value="049023984302"
+                            <input type="number" name="nomer_profil" value="<?php echo $data_profil['nomer_profil'];?>"
                                 class="form-control"  class="required" />
                         </div>
                         <div class="form-group">
                             <label>Alamat</label>
                             <textarea class="form-control" name="alamat_profil" rows="5" cols="50"
-                                class="required">MPQG+5MG, Jl. Prof. Moch Yamin, Ketintang, Kec. Gayungan, Kota SBY, Jawa Timur 60231</textarea>
+                                class="required"><?php echo $data_profil['alamat_profil'];?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Link Map</label>
+                            <textarea class="form-control" name="linkmap" rows="5" cols="50"
+                                class="required"><?php echo $data_profil['link_map'];?></textarea>
                         </div>
                         <div class="form-group">
                             <label>Deskripsi</label>
                             <textarea name="deskripsi_profil" class="form-control" rows="5" cols="50"
-                                class="required">blablabala</textarea>
+                                class="required"><?php echo $data_profil['deskripsi_profil'];?></textarea>
                         </div>
                         <div class="form-group">
                             <label>Ubah Logo</label><br>
